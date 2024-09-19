@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        NODE_VERSION = '14.x'  // Specify your Node.js version here
+        NODE_VERSION = 'NodeJS 14.x'  // Replace with the name you used in Global Tool Configuration
     }
 
     tools {
-        nodejs "${NODE_VERSION}"  // Use Node.js version
+        nodejs "${NODE_VERSION}"  // This now references the configured NodeJS installation
     }
 
     stages {
@@ -35,7 +35,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'npm run test -- --watchAll=false'  // Disable interactive watch mode
+                sh 'npm run test -- --watchAll=false'
             }
         }
 
