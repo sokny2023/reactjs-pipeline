@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     environment {
-        NODE_VERSION = 'NodeJS 14.x'  // Replace with the name you used in Global Tool Configuration
+        NODE_VERSION = 'NodeJS 14.x'  // Adjust this as per your Node.js version
     }
 
     tools {
-        nodejs "${NODE_VERSION}"  // This now references the configured NodeJS installation
+        nodejs "${NODE_VERSION}"
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
@@ -49,8 +48,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying the React app...'
-                // Example of deployment step (adjust as needed):
-                // sh 'scp -r build/* user@your-server:/var/www/html'
+                // Add your deployment steps here
             }
         }
     }
@@ -58,7 +56,10 @@ pipeline {
     post {
         always {
             echo 'Cleaning up workspace...'
-            cleanWs()
+            // Wrapping cleanWs in a node block to ensure workspace context is available
+            node {
+                cleanWs()
+            }
         }
 
         success {
