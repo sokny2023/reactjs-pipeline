@@ -56,9 +56,8 @@ pipeline {
     post {
         always {
             echo 'Cleaning up workspace...'
-            // Use agent any to ensure we can clean up the workspace
-            agent any
-            steps {
+            // Wrapping cleanWs in node to ensure workspace context is available
+            node {
                 cleanWs()
             }
         }
