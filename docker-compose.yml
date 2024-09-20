@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nextjs-pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3515:3000" 
+    environment:
+      NODE_ENV: production
+    command: npm run start
